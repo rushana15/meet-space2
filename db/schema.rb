@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +50,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
     t.bigint "venue_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.date "booking_date"
     t.string "start_time"
     t.string "end_time"
@@ -61,7 +64,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
     t.bigint "booking_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
     t.index ["booking_id"], name: "index_chatrooms_on_booking_id"
+    t.index ["event_id"], name: "index_chatrooms_on_event_id"
+  end
+
+  create_table "event_bookings", force: :cascade do |t|
+    t.integer "payment_status", default: 0
+    t.boolean "customer_paid", default: false
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_bookings_on_event_id"
+    t.index ["user_id"], name: "index_event_bookings_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "public", default: true
+    t.integer "ticket_price", default: 0
+    t.string "reoccuring", default: "f"
+    t.bigint "user_id", null: false
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_events_on_booking_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -90,6 +120,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
     t.bigint "venue_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_reviews_on_event_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
     t.index ["venue_id"], name: "index_reviews_on_venue_id"
   end
@@ -131,6 +163,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
   add_foreign_key "chatrooms", "bookings"
   add_foreign_key "favorites", "users"
   add_foreign_key "favorites", "venues"
+  add_foreign_key "event_bookings", "events"
+  add_foreign_key "event_bookings", "users"
+  add_foreign_key "events", "bookings"
+  add_foreign_key "events", "users"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "users"

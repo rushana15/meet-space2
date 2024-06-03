@@ -1,3 +1,4 @@
+
 <% @venue = venue %>
   <div class="card-carousel">
     <div id="carouselExampleIndicators-<%= index %>" class="carousel slide" data-bs-ride="carousel">
@@ -10,7 +11,7 @@
       <div class="carousel-inner">
         <% @venue.photos.each_with_index do |photo, idx| %>
           <div class="carousel-item <%= "active" if idx.zero? %>">
-            <%= cl_image_tag photo.key, alt: @venue.name, class: "d-block w-100" %>
+            <%= cl_image_tag photo.key, alt: "PICTURE", class: "d-block w-100" %>
           </div>
         <% end %>
       </div>

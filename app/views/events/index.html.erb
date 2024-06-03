@@ -1,0 +1,29 @@
+<div class="main-container">
+  <div class="cards-index-container">
+   <div class="title-index mb-2">
+      <h1>All Events</h1>
+        <%= render "shared/search" %>
+   </div>
+          <% @events.each_with_index do |event, index| %>
+            <div class="card-index" id="index">
+              <h2><%= event.title %></h2>
+              <p class="address"><strong <%= event.description %>></strong></p>
+              <p>£<%= event.ticket_price %> pp</p>
+              <p>Re-occurring - <strong><%= event.reoccuring %></strong></p>
+              <div id= "link_to_view"><%= link_to "View this event", event_path(event) %></div>
+              <% if event.photos.attached? %>
+                <%= render 'shared/carousel', venue: event, index: index %>
+              <% else %>
+                <p>No images available for this event.</p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+
+      <div id="map"
+       data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>

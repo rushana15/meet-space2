@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :venue
+  has_many :events
 
   has_one :chatroom, dependent: :destroy
   validates :comment, :booking_date, :start_time, :end_time, presence: true

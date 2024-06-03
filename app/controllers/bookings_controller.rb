@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
 
 
-  before_action :set_venue, only: [:create]
+  before_action :set_venue, only: [:create, :show]
   before_action :set_booking, only: [:destroy, :confirm]
   before_action :authenticate_user!
 
@@ -23,6 +23,10 @@ class BookingsController < ApplicationController
       render :new
 
     end
+  end
+
+  def show
+    authorize @booking
   end
 
   def confirm
