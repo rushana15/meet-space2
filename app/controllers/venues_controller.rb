@@ -70,7 +70,6 @@ class VenuesController < ApplicationController
     authorize @venue
     @venue.destroy
     redirect_to profile_path(current_user)
-
   end
 
   def category
@@ -104,7 +103,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
   end
 
-  def venue_params
+  def venue_paramsc
     params.require(:venue).permit(:name, :address, :capacity, :facilities, :category, :description, photos: [])
   end
   def authorize_venue

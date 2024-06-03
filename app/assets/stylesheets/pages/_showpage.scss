@@ -1,204 +1,200 @@
 
-.container-showpage {
-  margin: 0 auto;
-}
-
 .main-showpage {
   margin: 0 auto;
-}
 
-h2 {
-  color: white;
-}
-
-.container-top, .container-middle, .container-bottom {
-  margin: 20px;
-  padding: 20px;
-  background-color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-}
-
-.container-top {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.carousel-container {
-  flex: 2;
-  margin-right: 20px;
-}
-
-.venue-main-img {
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.show-map {
-  flex: 1;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.container-middle {
-  display: flex;
-  flex-wrap: center;
-  &-card {
-    flex:2;
+  h2 {
+    color: white;
   }
 
-}
-
-.cards-showpage {
-  display: flex;
-  gap: 50px;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px;
-}
-
-.form-show {
-  width: 30%;
-  margin-left: 10px;
-  flex:1;
-}
-
-.card-showpage {
-  width: 18rem;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.hover-effect {
-  transition: transform 0.3s ease-in-out;
-}
-
-.hover-effect:hover {
-  transform: scale(1.1);
-  z-index: 1000;
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.venue-thumbnail-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: flex;
-  justify-content: space-between;
-}
-
-
-
-.description {
-  flex: 2;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  color: white;
-  text-align: center;
-}
-
-.description p {
-  margin: 10px 0;
-  color: white;
-}
-
-.description .btn {
-  margin-top: 10px;
-}
-
-
-
-.form-show  {
-  margin-bottom: 20px;
-  text-align: center;
-  color: white;
-  .btn {
-    width:100%;
- }
-}
-
-.simple input, .simple textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  color: black;
-}
-
-.btn-show {
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #008080;
-  border: none;
-  color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-}
-
-.button-form:hover, .simple_form .button-form:hover {
-  background-color: #006666;
-}
-
-.container-bottom {
-  margin-top: 20px;
-}
-
-.reviews {
-  margin-top: 0px;
-  color: white;
-
-
-  ul {
-    list-style-type: none;
+  .container-top, .container-middle, .container-bottom {
+    margin: 20px;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
   }
 
-}
+  .container-top {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-.card-review {
-  background-color: #1d1c1c;
-  padding: 2px 30px 0px 5px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  width: 90vh;
-}
+  .carousel-container {
+    flex: 2;
+    margin-right: 20px;
+  }
+
+  .venue-main-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .show-map {
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .container-middle {
+    display: flex;
+    flex-wrap: center;
+    &-card {
+      flex:2;
+    }
+
+  }
+
+  .cards-showpage {
+    display: flex;
+    gap: 50px;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .form-show {
+    width: 30%;
+    margin-left: 10px;
+    flex:1;
+  }
+
+  .card-showpage {
+    width: 18rem;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .hover-effect {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .hover-effect:hover {
+    transform: scale(1.1);
+    z-index: 1000;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .venue-thumbnail-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: flex;
+    justify-content: space-between;
+  }
 
 
-.no-hover-effect {
-  transform: none !important;
-}
 
-.carousel-container .carousel-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+  .description {
+    flex: 2;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+  }
+
+  .description p {
+    margin: 10px 0;
+    color: white;
+  }
+
+  .description .btn {
+    margin-top: 10px;
+  }
 
 
 
-.star-rating {
-  font-size: 20px;
-  color: gold;
+  .form-show  {
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+    .btn {
+      width:100%;
+   }
+  }
+
+  .simple input, .simple textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: black;
+  }
+
+  .btn-show {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #008080;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .button-form:hover, .simple_form .button-form:hover {
+    background-color: #006666;
+  }
+
+  .container-bottom {
+    margin-top: 20px;
+  }
+
+  .reviews {
+    margin-top: 0px;
+    color: white;
+
+
+    ul {
+      list-style-type: none;
+    }
+
+  }
+
+  .card-review {
+    background-color: #1d1c1c;
+    padding: 2px 30px 0px 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    width: 90vh;
+  }
+
+
+  .no-hover-effect {
+    transform: none !important;
+  }
+
+  .carousel-container .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+
+  .star-rating {
+    font-size: 20px;
+    color: gold;
+  }
 }

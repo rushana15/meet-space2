@@ -80,6 +80,7 @@
                   <%= link_to "Chat with #{other_user}", chatroom_path(booking.chatroom) %>
                 <% if booking.confirmed %>
                   <h6 class="approved"><strong>Your booking has been confirmed.</strong></h6>
+                  <%= link_to "Create event", new_booking_event_path(booking) %>
                 <% else %>
                   <h6 class="pending"><strong>Still awaiting confirmation!</strong></h6>
                 <% end %>

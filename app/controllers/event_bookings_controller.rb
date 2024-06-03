@@ -1,0 +1,2 @@
+class EventBookingsController < ApplicationController
+end

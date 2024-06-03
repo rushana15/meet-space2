@@ -14,9 +14,13 @@ Rails.application.routes.draw do
     collection do
       get 'category/:category', to: 'venues#category', as: :category
     end
-    resources :bookings, except: [:show]
+    resources :bookings, only: [:new, :create]
     resources :reviews, only: %i[new create]
     resources :favorites, only: %i[create destroy]
+  end
+
+  resources :bookings, only: [:show] do
+    resources :events, only: [:new, :create]
   end
 
   resources :bookings, only: [:destroy] do
@@ -26,7 +30,14 @@ Rails.application.routes.draw do
   end
 
   resources :chatrooms, only: %i[index show create] do
-      resources :messages, only: %i[create]
+    resources :messages, only: %i[create]
+  end
+
+  resources :venues do
+    resources :reviews, only: [:new, :create]
+  end
+  resources :events, except: %i[new create] do
+    resources :event_bookings, only: [:new, :create]
   end
 
   resources :reviews, only: [:destroy]
