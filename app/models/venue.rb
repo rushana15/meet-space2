@@ -5,7 +5,8 @@ class Venue < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many_attached :photos, dependent: :destroy
-
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
   validates :name, :address, :category, :capacity, presence: true
 
   validates :category, inclusion: { in: CATEGORIES }

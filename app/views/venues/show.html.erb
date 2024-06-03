@@ -56,13 +56,26 @@
           </div>
 
           <div class="description">
-            <h2>Venue Description</h2>
+            <h2>Venue TEST Description</h2>
             <p><strong>Name:</strong> <%= @venue.name %></p>
-            <p><strong>Hire Details:</strong> Venue hire for network</p>
+            <p><strong>Hire Stuff:</strong> Venue hire for network</p>
             <p><strong>Max Capacity:</strong> <%= @venue.capacity %>pp</p>
             <p><strong>Location:</strong> <%= @venue.address %></p>
             <p><strong>Description:</strong> <%= @venue.description %></p>
             <%= link_to "Leave a Review", new_venue_review_path(@venue), class: "btn btn-secondary" %>
+
+ <% if user_signed_in? %>
+  <% if current_user.favorites.exists?(venue: @venue) %>
+    <%= button_to 'Remove from Favorites', venue_favorite_path(@venue, current_user.favorites.find_by(venue: @venue)), method: :delete %>
+  <% else %>
+    <%= button_to 'Add to Favorites', venue_favorites_path(@venue), method: :post %>
+  <% end %>
+<% else %>
+  <%= link_to 'Sign in to add to favorites', new_user_session_path %>
+<% end %>
+
+
+
           </div>
         </div>
 

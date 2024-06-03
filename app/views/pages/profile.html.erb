@@ -186,4 +186,22 @@
   </div>
 
 </div>
+<div class="favorites-container">
+  <h1><%= @user.username %>'s Profile</h1>
+
+  <h2>Favorites</h2>
+  <% if @favorite_venues.any? %>
+    <ul>
+      <% @favorite_venues.each do |venue| %>
+        <li>
+          <%= link_to venue.name, venue_path(venue) %>
+          <%= button_to 'Remove from Favorites', venue_favorite_path(venue, current_user.favorites.find_by(venue: venue)), method: :delete, class: 'btn btn-danger' %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>You have no favorite venues yet.</p>
+  <% end %>
+</div>
+
 </div>
