@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
     resources :bookings, only: [:new, :create]
     resources :reviews, only: %i[new create]
+    resources :favorites, only: %i[create destroy]
   end
 
   resources :bookings, only: [:show] do
@@ -38,7 +39,9 @@ Rails.application.routes.draw do
   resources :events, except: %i[new create] do
     resources :event_bookings, only: [:new, :create]
   end
+
   resources :reviews, only: [:destroy]
   resources :chatrooms, only: [:destroy]
   resources :messages, only: [:destroy]
+  resources :favorites, only: [:index]
 end
