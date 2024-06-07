@@ -1,6 +1,12 @@
 class FavoritePolicy < ApplicationPolicy
   attr_reader :user, :favorite
 
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
+  end
+  
   def initialize(user, favorite)
     @user = user
     @favorite = favorite

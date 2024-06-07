@@ -1,0 +1,14 @@
+<h1>My Favorite Venues</h1>
+
+<% if @favorites.any? %>
+  <ul>
+    <% @favorites.each do |favorite| %>
+      <li>
+        <%= link_to favorite.venue.name, venue_path(favorite.venue) %>
+        <%= button_to 'Remove from Favorites', venue_favorite_path(favorite.venue, favorite), method: :delete, class: "btn btn-danger", title: "Remove from Favorites" %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no favorite venues.</p>
+<% end %>
