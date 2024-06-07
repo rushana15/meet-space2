@@ -1,21 +1,31 @@
 <div class="container">
-
   <div class="main-showpage">
     <div class="container-top">
       <div class="carousel-container no-hover-effect">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <% @venue.photos.each_with_index do |photo, index| %>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>" aria-label="Slide <%= index + 1 %>"></button>
             <% end %>
           </div>
           <div class="carousel-inner">
-            <% @venue.photos.each_with_index do |photo, index| %>
-            <div class="carousel-item <%= 'active' if index.zero? %>">
-              <%= cl_image_tag photo.key, alt: @venue.name, class: "d-block w-100" %>
-            </div>
-            <% end %>
-          </div>
+  <% @venue.photos.each_with_index do |photo, index| %>
+    <div class="carousel-item <%= 'active' if index.zero? %> position-relative">
+      <%= cl_image_tag photo.key, alt: @venue.name, class: "d-block w-100" %>
+
+      <% if user_signed_in? %>
+        <div class="favorite-button position-absolute top-0 end-0 m-2">
+          <% if current_user.favorites.exists?(venue: @venue) %>
+            <%= button_to '♥', venue_favorite_path(@venue, current_user.favorites.find_by(venue: @venue)), method: :delete, class: "btn btn-danger", title: "Remove from Favorites" %>
+          <% else %>
+            <%= button_to '♡', venue_favorites_path(@venue), method: :post, class: "btn btn-outline-danger", title: "Add to Favorites" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -26,78 +36,55 @@
           </button>
         </div>
       </div>
-
-
       <div class="show-map">
         <div style="width: 100%; height: 100%;"
             data-controller="show-map"
             data-show-map-marker-value="<%= @marker.to_json %>"
             data-show-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         </div>
-
       </div>
     </div>
-
-
     <div class="container-middle">
-        <div class="container-middle-card">
-          <div class="cards-showpage">
-            <% if @venue.photos.attached? && @venue.photos[0].present? %>
-              <% @venue.photos.each_with_index do |photo, index| %>
+      <div class="container-middle-card">
+        <div class="cards-showpage">
+          <% if @venue.photos.attached? && @venue.photos[0].present? %>
+            <% @venue.photos.each_with_index do |photo, index| %>
               <% next if index.zero? || photo.nil? || index > 2 %>
               <div class="card hover-effect" style="width: 18rem;">
                 <%= cl_image_tag photo.key, alt: @venue.name, class: "venue-thumbnail-img" %>
-                <div class="card-body">
-                </div>
+                <div class="card-body"></div>
               </div>
-              <% end %>
             <% end %>
-
-          </div>
-
-          <div class="description">
-            <h2>Venue Description</h2>
-            <p><strong>Name:</strong> <%= @venue.name %></p>
-            <p><strong>Hire Stuff:</strong> Venue hire for network</p>
-            <p><strong>Max Capacity:</strong> <%= @venue.capacity %>pp</p>
-            <p><strong>Location:</strong> <%= @venue.address %></p>
-            <p><strong>Description:</strong> <%= @venue.description %></p>
-            <%= link_to "Leave a Review", new_venue_review_path(@venue), class: "btn btn-secondary" %>
-
- <% if user_signed_in? %>
-  <% if current_user.favorites.exists?(venue: @venue) %>
-    <%= button_to 'Remove from Favorites', venue_favorite_path(@venue, current_user.favorites.find_by(venue: @venue)), method: :delete %>
-  <% else %>
-    <%= button_to 'Add to Favorites', venue_favorites_path(@venue), method: :post %>
-  <% end %>
-<% else %>
-  <%= link_to 'Sign in to add to favorites', new_user_session_path %>
-<% end %>
-
-
-
-          </div>
-        </div>
-
-        <div class="form-show">
-          <h2>Book this Venue</h2>
-          <%= simple_form_for [@venue, @booking], class: "simple", data: { controller: 'flatpickr' } do |f| %>
-            <%= f.input :booking_date, as: :string, input_html: { placeholder: "Select booking date", data: { flatpickr_target: "bookingDate" } } %>
-            <%= f.input :start_time, as: :string, input_html: { placeholder: "Select start time", data: { flatpickr_target: "startTime" } } %>
-            <%= f.input :end_time, as: :string, input_html: { placeholder: "Select end time", data: { flatpickr_target: "endTime" } } %>
-            <%= f.input :comment, placeholder: "Please type a message to the venue host." %>
-            <%= f.submit "Reserve", class: "btn btn-primary" %>
           <% end %>
         </div>
+        <div class="description">
+          <h2>Venue Description</h2>
+          <p><strong>Name:</strong> <%= @venue.name %></p>
+          <p><strong>Hire Stuff:</strong> Venue hire for network</p>
+          <p><strong>Max Capacity:</strong> <%= @venue.capacity %>pp</p>
+          <p><strong>Location:</strong> <%= @venue.address %></p>
+          <p><strong>Description:</strong> <%= @venue.description %></p>
+          <%= link_to "Leave a Review", new_venue_review_path(@venue), class: "btn btn-secondary" %>
+        </div>
+      </div>
+      <div class="form-show">
+        <h2>Book this Venue</h2>
+        <%= simple_form_for [@venue, @booking], class: "simple", data: { controller: 'flatpickr' } do |f| %>
+          <%= f.input :booking_date, as: :string, input_html: { placeholder: "Select booking date", data: { flatpickr_target: "bookingDate" } } %>
+          <%= f.input :start_time, as: :string, input_html: { placeholder: "Select start time", data: { flatpickr_target: "startTime" } } %>
+          <%= f.input :end_time, as: :string, input_html: { placeholder: "Select end time", data: { flatpickr_target: "endTime" } } %>
+          <%= f.input :comment, placeholder: "Please type a message to the venue host." %>
+          <%= f.submit "Reserve", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
-
     <div class="container-bottom">
       <div class="reviews">
         <% @reviews.each do |review| %>
           <div class="card-review">
             <h5><em>Review by <%= review.user.username %></em></h5>
             <p class="mb-0"><%= review.content %></p>
-            <p class="star-rating"><%= '★ ' * (review.rating) %></p>
+            <p class="star-rating"><%= '★ ' * review.rating %></p>
           </div>
         <% end %>
       </div>

@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,8 +49,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
     t.bigint "venue_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
-    t.date "end_date"
     t.date "booking_date"
     t.string "start_time"
     t.string "end_time"
@@ -161,12 +158,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_194440) do
   add_foreign_key "bookings", "users"
   add_foreign_key "bookings", "venues"
   add_foreign_key "chatrooms", "bookings"
-  add_foreign_key "favorites", "users"
-  add_foreign_key "favorites", "venues"
   add_foreign_key "event_bookings", "events"
   add_foreign_key "event_bookings", "users"
   add_foreign_key "events", "bookings"
   add_foreign_key "events", "users"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "venues"
   add_foreign_key "messages", "chatrooms"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "users"

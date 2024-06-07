@@ -1,14 +1,14 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_venue
-
+  before_action :set_venue, only: [:create, :destroy]
 
   def index
-    @favorites = current_user.favorites.includes(:venue)
+    @favorites = policy_scope(current_user.favorites.includes(:venue))
+    authorize @favorites
   end
 
   def create
-    @venue = Venue.find(params[:venue_id])
+
     @favorite = current_user.favorites.build(venue: @venue)
     authorize @favorite
 
@@ -30,7 +30,6 @@ class FavoritesController < ApplicationController
   end
 
   private
-
   def set_venue
     @venue = Venue.find(params[:venue_id])
   end
