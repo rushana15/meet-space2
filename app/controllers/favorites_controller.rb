@@ -8,7 +8,6 @@ class FavoritesController < ApplicationController
   end
 
   def create
-
     @favorite = current_user.favorites.build(venue: @venue)
     authorize @favorite
 
@@ -30,6 +29,7 @@ class FavoritesController < ApplicationController
   end
 
   private
+
   def set_venue
     @venue = Venue.find(params[:venue_id])
   end

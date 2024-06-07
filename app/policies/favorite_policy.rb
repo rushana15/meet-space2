@@ -1,5 +1,6 @@
 class FavoritePolicy < ApplicationPolicy
   attr_reader :user, :favorite
+
   class Scope < Scope
     def resolve
       scope.where(user: user)
@@ -26,3 +27,4 @@ class FavoritePolicy < ApplicationPolicy
     # end
   end
 end
+
